@@ -31,7 +31,7 @@ template<typename T>
 template <typename ... Args>
 void stack2<T>::push_emplace(Args&&... value){
     T args[]={value...};
-for(const auto& e:args){
+for (const auto& e:args){
     this->push(e);
 }
 }
@@ -40,7 +40,7 @@ template <typename T>
 void stack2<T>::push(const T& value) {
     this->size++;
     std::unique_ptr<T> new_arr(new int[this->size]);
-    for(unsigned int i = 0; i < (this->size-1); i++){
+    for (unsigned int i = 0; i < (this->size-1); i++){
         new_arr.get()[i] = arr.get()[i];
     }
     new_arr.get()[this->size-1] = value;
@@ -56,7 +56,7 @@ void stack2<T>::pop() {
     }
     this->size--;
     std::unique_ptr<T> new_arr(new int[this->size]);
-    for(unsigned int i = 0; i < this->size; i++){
+    for (unsigned int i = 0; i < this->size; i++){
         new_arr.get()[i] = this->arr.get()[i];
     }
     this->arr.swap(new_arr);
@@ -72,10 +72,10 @@ template <typename T>
 void stack2<T>::push(T&& value) {
     this->size++;
     std::unique_ptr<T> new_arr(new int[this->size]);
-    for(unsigned int i = 0; i < (this->size-1); i++){
-        new_arr.get()[i]=arr.get()[i];
+    for (unsigned int i = 0; i < (this->size-1); i++){
+        new_arr.get()[i] = arr.get()[i];
     }
-    new_arr.get()[this->size-1]=std::move(value);
+    new_arr.get()[this->size-1] = std::move(value);
     this->arr.swap(new_arr);
     new_arr.release();
 }
