@@ -31,9 +31,8 @@ template<typename T>
 template <typename ... Args>
 void stack2<T>::push_emplace(Args&&... value){
     T args[]={value...};
-for (const auto& e:args){
+for (const auto& e:args)
     this->push(e);
-}
 }
 
 template <typename T>
@@ -50,7 +49,7 @@ void stack2<T>::push(const T& value) {
 
 template <typename T>
 void stack2<T>::pop() {
-    if(this->size == 0) {
+    if (this->size == 0) {
         std::cout << "Массив пуст";
         return;
     }

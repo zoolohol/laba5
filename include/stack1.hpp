@@ -34,7 +34,7 @@ stack1<T>::~stack1(){
 
 template <typename T>
 void stack1<T>::pop() {
-    if(this->size == 0) {
+    if (this->size == 0) {
         std::cout << "Массив пуст";
         return;
     }
