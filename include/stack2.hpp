@@ -31,7 +31,7 @@ template<typename T>
 template <typename ... Args>
 void stack2<T>::push_emplace(Args&&... value){
     T args[]={value...};
-for (const auto& e:args)
+for (const auto& e : args)
     this->push(e);
 }
 
