@@ -53,7 +53,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.tests">
+  <component name="RunManager" selected="CMake Application.source">
     <configuration name="source" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="stack" TARGET_NAME="source" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="stack" RUN_TARGET_NAME="source">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -83,7 +83,7 @@
       <workItem from="1577725793644" duration="7506000" />
       <workItem from="1577782162609" duration="2775000" />
       <workItem from="1577890895008" duration="1822000" />
-      <workItem from="1577959735366" duration="2992000" />
+      <workItem from="1577959735366" duration="3245000" />
     </task>
     <servers />
   </component>
