@@ -51,15 +51,15 @@ template <typename T>
 void stack2<T>::pop() {
     if (this->size == 0) {
         std::cout << "Массив пуст";
-        return;
+    } else {
+        this->size--;
+        std::unique_ptr<T> new_arr(new int[this->size]);
+        for (unsigned int i = 0; i < this->size; i++) {
+            new_arr.get()[i] = this->arr.get()[i];
+        }
+        this->arr.swap(new_arr);
+        new_arr.release();
     }
-    this->size--;
-    std::unique_ptr<T> new_arr(new int[this->size]);
-    for (unsigned int i = 0; i < this->size; i++){
-        new_arr.get()[i] = this->arr.get()[i];
-    }
-    this->arr.swap(new_arr);
-    new_arr.release();
 }
 
 template <typename T>
