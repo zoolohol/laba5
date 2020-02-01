@@ -53,7 +53,7 @@ void stack2<T>::pop() {
         std::cout << "Массив пуст";
     } else {
         this->size--;
-        std::unique_ptr<T> new_arr(new int[this->size]);
+        std::unique_ptr<T> new_arr(new T[this->size]);
         for (unsigned int i = 0; i < this->size; i++) {
             new_arr.get()[i] = this->arr.get()[i];
         }
