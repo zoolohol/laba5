@@ -36,6 +36,18 @@ for (const auto& e : args)
 }
 
 template <typename T>
+void stack2<T>::push(T&& value) {
+    this->size++;
+    std::unique_ptr<T> new_arr(new int[this->size]);
+    for (unsigned int i = 0; i < (this->size-1); i++){
+        new_arr.get()[i] = arr.get()[i];
+    }
+    new_arr.get()[this->size-1] = std::move(value);
+    this->arr.swap(new_arr);
+    new_arr.release();
+}
+
+template <typename T>
 void stack2<T>::push(const T& value) {
     this->size++;
     std::unique_ptr<T> new_arr(new T[this->size]);
@@ -65,18 +77,6 @@ void stack2<T>::pop() {
 template <typename T>
 const T& stack2<T>::head() const{
     return this->arr.get()[this->size-1];
-}
-
-template <typename T>
-void stack2<T>::push(T&& value) {
-    this->size++;
-    std::unique_ptr<T> new_arr(new int[this->size]);
-    for (unsigned int i = 0; i < (this->size-1); i++){
-        new_arr.get()[i] = arr.get()[i];
-    }
-    new_arr.get()[this->size-1] = std::move(value);
-    this->arr.swap(new_arr);
-    new_arr.release();
 }
 
 #endif // INCLUDE_HEADER2_HPP_
