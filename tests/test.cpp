@@ -18,6 +18,5 @@ TEST(Example, EmptyTest) {
     stack2<int> b;
     b.push_emplace(1, 2);
     b.push_emplace(3, 4);
-    b.pop();
-    EXPECT_EQ(3, b.head());
+    EXPECT_EQ(4, b.head());
 }
