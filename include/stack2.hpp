@@ -38,7 +38,7 @@ for (const auto& e : args)
 template <typename T>
 void stack2<T>::push(T&& value) {
     this->size++;
-    std::unique_ptr<T> new_arr(new int[this->size]);
+    std::unique_ptr<T> new_arr(new T[this->size]);
     for (unsigned int i = 0; i < (this->size-1); i++){
         new_arr.get()[i] = arr.get()[i];
     }
