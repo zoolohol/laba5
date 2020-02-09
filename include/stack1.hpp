@@ -17,7 +17,6 @@ public:
     void pop();
     const T& head() const;
     stack1();
-    ~stack1();
 };
 
 template <typename T>
@@ -27,19 +26,13 @@ stack1<T>::stack1(){
 }
 
 template <typename T>
-stack1<T>::~stack1(){
-    this->size = 0;
-    this->arr.release();
-}
-
-template <typename T>
 void stack1<T>::pop() {
     if (this->size == 0) {
         std::cout << "Массив пуст";
         return;
     }
     this->size--;
-    std::unique_ptr<T> new_arr(new int[this->size]);
+    std::unique_ptr<T> new_arr(new T[this->size]);
     for (unsigned int i = 0; i < this->size; i++){
         new_arr.get()[i]  =  this->arr.get()[i];
     }
@@ -55,7 +48,7 @@ const T& stack1<T>::head() const{
 template <typename T>
 void stack1<T>::push(const T& value) {
 this->size++;
- std::unique_ptr<T> new_arr(new int[this->size]);
+ std::unique_ptr<T> new_arr(new T[this->size]);
  for (unsigned int i = 0; i < (this->size-1); i++){
      new_arr.get()[i] = arr.get()[i];
  }
@@ -67,7 +60,7 @@ this->size++;
 template <typename T>
 void stack1<T>::push(T&& value) {
     this->size++;
-    std::unique_ptr<T> new_arr(new int[this->size]);
+    std::unique_ptr<T> new_arr(new T[this->size]);
     for (unsigned int i = 0; i < (this->size-1); i++){
         new_arr.get()[i] = arr.get()[i];
     }

@@ -20,3 +20,21 @@ TEST(Example, EmptyTest) {
     b.push_emplace(3, 4);
     EXPECT_EQ(4, b.head());
 }
+
+TEST(stak12, testcopy)
+{
+    EXPECT_EQ(std::is_copy_constructible_v<stack1<int>>, false);
+    EXPECT_EQ(std::is_copy_constructible_v<stack2<int>>, false);
+
+    EXPECT_EQ(std::is_copy_assignable_v<stack1<int>>, false);
+    EXPECT_EQ(std::is_copy_assignable_v<stack2<int>>, false);
+}
+
+TEST(stak12, testmove)
+{
+    EXPECT_EQ(std::is_move_constructible_v<stack1<int>>, true);
+    EXPECT_EQ(std::is_move_constructible_v<stack2<int>>, true);
+
+    EXPECT_EQ(std::is_move_assignable_v<stack1<int>>, true);
+    EXPECT_EQ(std::is_move_assignable_v<stack2<int>>, true);
+}
