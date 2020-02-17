@@ -7,14 +7,14 @@ int main(){
     stack2<int> y;
     for (int i = 0; i < 10; i++)
         t.push(i);
-    for (int i = 0; i < 10; i++){
-        std::cout << t.head() << "\t";
+   for (int i = 0; i < 11; i++){
+       std::cout << t.head() << "\t";
         t.pop();
     }
     y.push_emplace(0, 1, 2);
     for (int i = 0; i < 3; i++){
         std::cout << y.head() << "\t";
-        y.pop();
+       y.pop();
     }
     return 0;
 }

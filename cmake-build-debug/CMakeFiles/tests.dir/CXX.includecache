@@ -18,7 +18,7 @@ memory
 iostream
 -
 
-/cygdrive/c/Git/lab-05-stack/tests/test.cpp
+/cygdrive/d/Projects/laba5/tests/test.cpp
 gtest/gtest.h
 -
 iostream

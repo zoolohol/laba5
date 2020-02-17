@@ -2,14 +2,13 @@
 
 #ifndef INCLUDE_HEADER1_HPP_
 #define INCLUDE_HEADER1_HPP_
-#pragma once
 #include <memory>
 #include <iostream>
 template <typename T>
 class stack1
 {
 private:
-    unsigned int size;
+    unsigned int *size=new unsigned int;
     std::unique_ptr<T> arr;
 public:
     void push(T&& value);
@@ -17,56 +16,61 @@ public:
     void pop();
     const T& head() const;
     stack1();
+    ~stack1();
 };
 
 template <typename T>
 stack1<T>::stack1(){
-    this->size = 0;
-    this->arr.reset(new T[this->size]);
+    *(size) = 0;
+    arr.reset(new T[*(size)]);
 }
-
+template <typename T>
+stack1<T>::~stack1(){
+    delete size;
+    arr.reset();
+}
 template <typename T>
 void stack1<T>::pop() {
-    if (this->size == 0) {
+    if (*(size) == 0) {
         std::cout << "Массив пуст";
         return;
     }
-    this->size--;
-    std::unique_ptr<T> new_arr(new T[this->size]);
-    for (unsigned int i = 0; i < this->size; i++){
-        new_arr.get()[i]  =  this->arr.get()[i];
+    (*(size))--;
+    std::unique_ptr<T> new_arr(new T[*(size)]);
+    for (unsigned int i = 0; i < *(size); ++i){
+        new_arr.get()[i]  =  arr.get()[i];
     }
-    this->arr.swap(new_arr);
-    new_arr.release();
+    arr.swap(new_arr);
+    new_arr.reset();
 }
 
 template <typename T>
 const T& stack1<T>::head() const{
-        return this->arr.get()[this->size - 1];
+        return arr.get()[*(size) - 1];
 }
 
 template <typename T>
 void stack1<T>::push(const T& value) {
-this->size++;
- std::unique_ptr<T> new_arr(new T[this->size]);
- for (unsigned int i = 0; i < (this->size-1); i++){
+    (*(size))++;
+std::unique_ptr<T> new_arr(new T[*(size)]);
+ for (unsigned int i = 0; i < (*(size)-1); ++i){
      new_arr.get()[i] = arr.get()[i];
  }
- new_arr.get()[this->size-1] = value;
- this->arr.swap(new_arr);
- new_arr.release();
+ new_arr.get()[*(size)-1] = value;
+ arr.swap(new_arr);
+    new_arr.reset();
 }
 
 template <typename T>
 void stack1<T>::push(T&& value) {
-    this->size++;
-    std::unique_ptr<T> new_arr(new T[this->size]);
-    for (unsigned int i = 0; i < (this->size-1); i++){
+    (*(size))++;
+    std::unique_ptr<T> new_arr(new T[*(size)]);
+    for (unsigned int i = 0; i < (*(size)-1); ++i){
         new_arr.get()[i] = arr.get()[i];
     }
-    new_arr.get()[this->size-1] = std::move(value);
-    this->arr.swap(new_arr);
-    new_arr.release();
+    new_arr.get()[*(size)-1] = std::move(value);
+    arr.swap(new_arr);
+    new_arr.reset();
 }
 
 #endif // INCLUDE_HEADER1_HPP_
