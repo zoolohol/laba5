@@ -1,14 +1,14 @@
 //Copyright 2019 <LinkIvan333>
 
-#ifndef INCLUDE_HEADER2_HPP_
-#define INCLUDE_HEADER2_HPP_
+#ifndef INCLUDE_STACK2_HPP_
+#define INCLUDE_STACK2_HPP_
 #include <memory>
 #include <iostream>
 template <typename T>
 class stack2
 {
 private:
-    unsigned int *size=new unsigned int;
+    unsigned int *size = new unsigned int;
     std::unique_ptr<T> arr;
 public:
     stack2();
@@ -84,4 +84,4 @@ void stack2<T>::push(T&& value) {
 }
 
 
-#endif // INCLUDE_HEADER2_HPP_
+#endif // INCLUDE_STACK2_HPP_
