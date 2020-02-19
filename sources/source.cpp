@@ -5,10 +5,12 @@
 int main(){
     stack1<int> t;
     stack2<int> y;
-    for (int i = 0; i < 10; i++)
+    stack1<int> z(std::move(t));
+    for (int i = 0; i < 10; i++){
         t.push(i);
-   for (int i = 0; i < 11; i++){
-       std::cout << t.head() << "\t";
+    }
+    for (int i = 0; i < 10; i++){
+        std::cout << t.head() << "\t";
         t.pop();
     }
     y.push_emplace(0, 1, 2);
@@ -16,5 +18,6 @@ int main(){
         std::cout << y.head() << "\t";
        y.pop();
     }
+
     return 0;
 }

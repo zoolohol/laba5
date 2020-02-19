@@ -19,6 +19,8 @@ public:
     void push(const T& value);
     const T& head() const;
     void pop();
+    stack2(stack2 &&stack2);
+    stack2<T>& operator=(stack2<T>&& stack);
 };
 
 template<typename T>
@@ -26,6 +28,23 @@ stack2<T>::stack2() {
     *size = 0;
     arr.reset(new T[*size]);
 }
+
+template <typename T>
+stack2<T>::stack2(stack2&& stack){
+    std::swap(*size,*stack.size);
+    std::swap(arr,stack.arr);
+}
+
+template <typename T>
+stack2<T>& stack2<T>::operator=(stack2<T>&& stack) {
+    if(std::move(stack) != this) {
+        std::swap(size, stack.size);
+        std::swap(this->arr, stack.arr);
+    }
+
+    return *this;
+}
+
 template<typename T>
 stack2<T>::~stack2(){
     delete size;

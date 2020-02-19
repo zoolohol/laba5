@@ -8,6 +8,9 @@
 
 TEST(Example, EmptyTest) {
     stack1<int> a;
+    stack1<std::string> c;
+    c.push("тевирп");
+    EXPECT_EQ("тевирп", c.head());
     a.push(1);
     a.push(2);
     a.push(3);
