@@ -4,6 +4,7 @@
 #define INCLUDE_STACK2_HPP_
 #include <memory>
 #include <iostream>
+#include <utility>
 template <typename T>
 class stack2
 {
@@ -31,13 +32,13 @@ stack2<T>::stack2() {
 
 template <typename T>
 stack2<T>::stack2(stack2&& stack){
-    std::swap(*size,*stack.size);
-    std::swap(arr,stack.arr);
+    std::swap(*size, *stack.size);
+    std::swap(arr, stack.arr);
 }
 
 template <typename T>
 stack2<T>& stack2<T>::operator=(stack2<T>&& stack) {
-    if(std::move(stack) != this) {
+    if (std::move(stack) != this) {
         std::swap(size, stack.size);
         std::swap(this->arr, stack.arr);
     }
