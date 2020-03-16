@@ -2,6 +2,8 @@
 
 #ifndef INCLUDE_STACK1_HPP_
 #define INCLUDE_STACK1_HPP_
+#ifndef INCLUDE_STACK1_HPP_
+#define INCLUDE_STACK1_HPP_
 #include <memory>
 #include <iostream>
 #include <type_traits>
