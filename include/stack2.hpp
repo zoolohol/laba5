@@ -5,102 +5,60 @@
 #include <memory>
 #include <iostream>
 #include <utility>
+#include <type_traits>
+#include <exception>
 template <typename T>
 class stack2
 {
-private:
-    unsigned int *size = new unsigned int;
-    std::unique_ptr<T> arr;
+    protected:
+    struct Node {
+        T data;
+        Node *next;
+    };
+    Node *head;
+
 public:
-    stack2();
-    ~stack2();
+    Stack() = default;
+
+    ~Stack() {
+        while (head) {
+            auto *act = head;
+            head = act->next;
+            delete act;
+        }
+    }
+
+    void push(T&& value) {
+        if (head == nullptr) {
+            auto node = new Node{std::move(value), nullptr};
+            head = node;
+        } else {
+            auto node = new Node{std::move(value), head};
+            head = node;
+        }
+    }
+
+    const T& Head() {
+        if (!head)
+            throw std::exception();
+        return head->data;
+    }
     template <typename ... Args>
-    void push_emplace(Args&&... value);
-    void push(T&& value);
-    void push(const T& value);
-    const T& head() const;
-    void pop();
-    stack2(stack2 &&stack2);
-    stack2<T>& operator=(stack2<T>&& stack);
-};
-
-template<typename T>
-stack2<T>::stack2() {
-    *size = 0;
-    arr.reset(new T[*size]);
-}
-
-template <typename T>
-stack2<T>::stack2(stack2&& stack){
-    std::swap(*size, *stack.size);
-    std::swap(arr, stack.arr);
-}
-
-template <typename T>
-stack2<T>& stack2<T>::operator=(stack2<T>&& stack) {
-    if (std::move(stack) != this) {
-        std::swap(size, stack.size);
-        std::swap(this->arr, stack.arr);
+    void push_emplace(Args&& ... value) {
+        auto node = Stack<T>::head;
+        Stack<T>::head = new typename
+                Stack<T>::Node{std::forward<Args>(value)..., node};
     }
 
-    return *this;
-}
-
-template<typename T>
-stack2<T>::~stack2(){
-    delete size;
-    arr.reset();
-}
-template<typename T>
-template <typename ... Args>
-void stack2<T>::push_emplace(Args&&... value){
-   T args[]={value...};
-for (auto e : args)
-    this->push(e);
-}
-
-template <typename T>
-void stack2<T>::pop() {
-    if (*size == 0) {
-        std::cout << "Массив пуст";
-        return;
+    T pop() {
+        if (Stack<T>::head) {
+            auto node = Stack<T>::head->data;
+            Stack<T>::head = Stack<T>::head->next;
+            return node;
+        } else {
+            throw std::exception();
+        }
     }
-    (*size)--;
-    std::unique_ptr<T> new_arr(new T[*size]);
-    for (unsigned int i = 0; i < *size; ++i){
-        new_arr.get()[i]  =  arr.get()[i];
-    }
-    arr.swap(new_arr);
-    new_arr.reset();
-}
-
-template <typename T>
-const T& stack2<T>::head() const{
-    return arr.get()[*size - 1];
-}
-
-template <typename T>
-void stack2<T>::push(const T& value) {
-    (*size)++;
-    std::unique_ptr<T> new_arr(new T[*size]);
-    for (unsigned int i = 0; i < (*size-1); ++i){
-        new_arr.get()[i] = arr.get()[i];
-    }
-    new_arr.get()[*size-1] = value;
-    arr.swap(new_arr);
-    new_arr.reset();
-}
-
-template <typename T>
-void stack2<T>::push(T&& value) {
-    size++;
-    std::unique_ptr<T> new_arr(new T[*size]);
-    for (unsigned int i = 0; i < (*size-1); ++i){
-        new_arr.get()[i] = arr.get()[i];
-    }
-    new_arr.get()[*size-1] = std::move(value);
-    arr.swap(new_arr);
-    new_arr.reset();
 }
 
 
