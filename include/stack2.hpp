@@ -59,7 +59,7 @@ public:
             throw std::exception();
         }
     }
-}
+};
 
 
 #endif // INCLUDE_STACK2_HPP_
