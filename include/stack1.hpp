@@ -52,6 +52,6 @@ public:
         else
             throw std::exception();
     }
-}
+};
 
 #endif // INCLUDE_STACK1_HPP_
